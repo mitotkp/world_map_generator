@@ -1,6 +1,6 @@
 //mport { mulberry32 } from "./random.ts"; 
 //import { fbm } from "./noise.ts"; 
-import { generateHeightMap, normalize } from './heightmap.ts'; 
+import { generateHeightMap, applyContinentMask, normalize } from './heightmap.ts'; 
 import { colorForHeight } from './color.ts';
 
 const canvas = document.getElementById('canvap') as HTMLCanvasElement; 
@@ -18,6 +18,8 @@ if (ctx) {
   const imageData = ctx.createImageData(width, height); 
   const data = imageData.data; 
   const alturas = generateHeightMap(width, height, 42); 
+  normalize(alturas); 
+  applyContinentMask(alturas, width, height, 0.6); 
   normalize(alturas); 
 
   for (let y = 0; y < height; y++){
