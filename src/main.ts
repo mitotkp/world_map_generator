@@ -1,6 +1,6 @@
 //mport { mulberry32 } from "./random.ts"; 
-import { fbm } from "./noise.ts"; 
-import { generateHeightMap } from './heightmap.ts'; 
+//import { fbm } from "./noise.ts"; 
+import { generateHeightMap, normalize } from './heightmap.ts'; 
 
 const canvas = document.getElementById('canvap') as HTMLCanvasElement; 
 const ctx = canvas.getContext('2d'); 
@@ -17,6 +17,7 @@ if (ctx) {
   const imageData = ctx.createImageData(width, height); 
   const data = imageData.data; 
   const alturas = generateHeightMap(width, height, 42); 
+  normalize(alturas); 
 
   for (let y = 0; y < height; y++){
     for(let x = 0; x < width; x++){

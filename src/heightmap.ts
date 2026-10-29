@@ -14,3 +14,20 @@ export function generateHeightMap(width: number, height: number, seed: number): 
 
     return heights; 
 }
+
+export function normalize(heights: Float32Array): void {
+
+    let min = Infinity; 
+    let max = -Infinity; 
+
+    for(let i = 0; i < heights.length; i++){
+        min = Math.min(min, heights[i]);
+        max = Math.max(max, heights[i]); 
+    }
+
+    for(let i = 0; i < heights.length; i++){
+        heights[i] = (heights[i] - min) / (max - min); 
+    }
+
+
+}
